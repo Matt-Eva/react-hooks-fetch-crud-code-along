@@ -1,11 +1,21 @@
+// import { body } from "msw/lib/types/context";
 import React, { useState } from "react";
 
-function ItemForm() {
+function ItemForm({handleSubmit}) {
   const [name, setName] = useState("");
   const [category, setCategory] = useState("Produce");
 
+  const itemData = {
+    name: name,
+    category: category,
+    isInCart: false
+  }
+
   return (
-    <form className="NewItem">
+    <form className="NewItem" onSubmit={(e) => {
+      handleSubmit(e, itemData);
+      setName("");
+    }}>
       <label>
         Name:
         <input
